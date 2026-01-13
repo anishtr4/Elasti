@@ -42,13 +42,24 @@ function simpleTextEmbedding(text: string, dimensions: number = 768): number[] {
     return embedding;
 }
 
-// Generate embeddings - uses Gemini if available, otherwise fallback
+// Generate embeddings - uses Gemini or OpenAI if available, otherwise fallback
 export async function getEmbeddings(texts: string[]): Promise<number[][]> {
-    if (LLM_PROVIDER === 'gemini' && process.env.GEMINI_API_KEY) {
+    const provider = process.env.EMBEDDING_PROVIDER || process.env.LLM_PROVIDER || 'gemini';
+
+    if (provider === 'gemini' && process.env.GEMINI_API_KEY) {
         return getGeminiEmbeddings(texts);
     }
-    // Fallback to simple embeddings for non-Gemini providers
-    console.log('Using simple text embeddings (no Gemini API key)');
+
+    // TODO: Add OpenAI support here if needed
+    // if (provider === 'openai' && process.env.OPENAI_API_KEY) {
+    //     return getOpenAIEmbeddings(texts);
+    // }
+
+    // Fallback to simple embeddings if no valid embedding provider is found
+    console.warn(`⚠️  WARNING: Using simple text embeddings (Bag of Words).
+    Reason: EMBEDDING_PROVIDER is '${provider}' but no compatible API key was found or provider is not supported for embeddings.
+    Search results will be poor. Recommended: Set EMBEDDING_PROVIDER=gemini`);
+
     return texts.map(text => simpleTextEmbedding(text));
 }
 

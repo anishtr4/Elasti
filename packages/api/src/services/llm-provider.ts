@@ -6,7 +6,7 @@ import OpenAI from 'openai';
 type LLMProvider = 'gemini' | 'groq' | 'openai';
 
 // Get provider from env
-const LLM_PROVIDER = (process.env.LLM_PROVIDER || 'gemini') as LLMProvider;
+const CHAT_PROVIDER = (process.env.CHAT_PROVIDER || process.env.LLM_PROVIDER || 'gemini') as LLMProvider;
 
 // Initialize clients lazily
 let geminiClient: GoogleGenerativeAI | null = null;
@@ -36,7 +36,7 @@ function getOpenAIClient(): OpenAI {
 
 // Generate text completion
 export async function generateCompletion(prompt: string): Promise<string> {
-    switch (LLM_PROVIDER) {
+    switch (CHAT_PROVIDER) {
         case 'gemini':
             return generateWithGemini(prompt);
         case 'groq':
@@ -44,7 +44,7 @@ export async function generateCompletion(prompt: string): Promise<string> {
         case 'openai':
             return generateWithOpenAI(prompt);
         default:
-            throw new Error(`Unknown LLM provider: ${LLM_PROVIDER}`);
+            throw new Error(`Unknown Chat provider: ${CHAT_PROVIDER}`);
     }
 }
 
@@ -81,7 +81,7 @@ async function generateWithOpenAI(prompt: string): Promise<string> {
 // Get current provider info for debugging
 export function getCurrentProvider(): { provider: string; configured: boolean } {
     let configured = false;
-    switch (LLM_PROVIDER) {
+    switch (CHAT_PROVIDER) {
         case 'gemini':
             configured = !!process.env.GEMINI_API_KEY;
             break;
@@ -92,7 +92,7 @@ export function getCurrentProvider(): { provider: string; configured: boolean } 
             configured = !!process.env.OPENAI_API_KEY;
             break;
     }
-    return { provider: LLM_PROVIDER, configured };
+    return { provider: CHAT_PROVIDER, configured };
 }
 
-console.log(`🤖 LLM Provider: ${LLM_PROVIDER}`);
+console.log(`🤖 Chat Provider: ${CHAT_PROVIDER}`);
