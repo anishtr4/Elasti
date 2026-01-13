@@ -1,7 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Get provider from env
-const LLM_PROVIDER = process.env.LLM_PROVIDER || 'gemini';
 
 // Initialize Gemini client lazily
 let geminiClient: GoogleGenerativeAI | null = null;
