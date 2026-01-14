@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { answerQuestion } from '../services/qa-engine.js';
+import { answerQuestion } from '../services/core/qa-engine.js';
 
 export const chatRouter = Router();
 

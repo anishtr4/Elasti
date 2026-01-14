@@ -7,9 +7,9 @@ import { authRouter } from './routes/auth.js';
 import { chatRouter } from './routes/chat.js';
 import { projectsRouter } from './routes/projects.js';
 import { crawlRouter } from './routes/crawl.js';
-import { initializeOpenSearch } from './services/opensearch.js';
+import { initializeOpenSearch } from './services/storage/opensearch.js';
 import { initializeWorker } from './workers/crawl-worker.js';
-import { Scheduler } from './services/scheduler.js';
+import { Scheduler } from './services/crawling/scheduler.js';
 
 dotenv.config();
 

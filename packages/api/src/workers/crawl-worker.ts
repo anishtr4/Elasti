@@ -1,7 +1,7 @@
 import { Queue, Worker, Job } from 'bullmq';
 import IORedis from 'ioredis';
-import { crawlWebsite } from '../services/crawler.js';
-import { ProjectStore } from '../services/project-store.js';
+import { crawlWebsite } from '../services/crawling/crawler.js';
+import { ProjectStore } from '../services/storage/project-store.js';
 
 const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 

@@ -1,5 +1,5 @@
-import { ProjectStore } from './project-store';
-import { addCrawlJob } from '../workers/crawl-worker';
+import { ProjectStore } from '../storage/project-store';
+import { addCrawlJob } from '../../workers/crawl-worker';
 
 export class SchedulerService {
     private interval: NodeJS.Timeout | null = null;

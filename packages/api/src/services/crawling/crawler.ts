@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import * as cheerio from 'cheerio';
-import { indexChunks, ChunkDocument, deleteProjectChunks } from './opensearch.js';
-import { getEmbeddings } from './embeddings.js';
+import { indexChunks, ChunkDocument, deleteProjectChunks } from '../storage/opensearch.js';
+import { getEmbeddings } from '../ai/embeddings.js';
 
 export interface CrawlResult {
     pagesProcessed: number;

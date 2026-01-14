@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { ProjectStore } from '../services/project-store.js';
+import { ProjectStore } from '../services/storage/project-store.js';
 
 export const projectsRouter = Router();
 

@@ -13,26 +13,32 @@ A self-hosted Q&A bot that answers questions based on your website's content.
 ### 2. Setup
 
 ```bash
-# Clone and enter directory
+# Clone repository (if not already done)
 cd /path/to/elasti
 
-# Copy environment file
+# One-command setup (installs deps + starts infrastructure)
+npm run setup
+
+# Add your API keys to .env
 cp .env.example .env
-
-# Add your OpenAI API key to .env
-echo "OPENAI_API_KEY=sk-your-key-here" >> .env
-
-# Start infrastructure (OpenSearch + Redis)
-docker-compose up -d opensearch redis
-
-# Install dependencies
-npm install
-
-# Start API (development)
-npm run dev
+# Edit .env and add your GEMINI_API_KEY or OPENAI_API_KEY
 ```
 
-### 3. Create a Project & Crawl
+### 3. Start Development
+
+```bash
+# Terminal 1: Start API (includes worker + scheduler)
+npm run dev
+
+# Terminal 2 (optional): Start Dashboard
+npm run dev:dashboard
+
+# Terminal 3 (optional): Start test website
+npm run test:website
+# Opens at http://localhost:8080
+```
+
+### 4. Create a Project & Crawl
 
 ```bash
 # Create a project
@@ -68,9 +74,7 @@ The repository includes a static website in `test-website/` to verify the bot fu
 
 1.  **Serve the Website**:
     ```bash
-    # Using Python (simplest)
-    cd test-website
-    python3 -m http.server 8080
+    npm run test:website
     ```
     The site will be available at `http://localhost:8080`.
 

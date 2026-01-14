@@ -1,8 +1,8 @@
-import { hybridSearch } from './opensearch.js';
-import { getEmbedding } from './embeddings.js';
-import { generateCompletion } from './llm-provider.js';
+import { hybridSearch } from '../storage/opensearch.js';
+import { getEmbedding } from '../ai/embeddings.js';
+import { generateCompletion } from '../ai/llm-provider.js';
 
-import { ProjectStore } from './project-store.js';
+import { ProjectStore } from '../storage/project-store.js';
 
 export interface ChatResponse {
     answer: string;
