@@ -15,7 +15,7 @@
     "test": "npm run test --workspaces",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "setup": "npm install && docker-compose up -d opensearch redis && echo '✅ Setup complete! Add your API keys to .env and run: npm run dev'"
+    "setup": "npm install && docker-compose up -d opensearch redis postgres && echo '✅ Setup complete! Add your API keys to .env and run: npm run dev'"
   },
   "devDependencies": {
     "serve": "^14.2.1",
